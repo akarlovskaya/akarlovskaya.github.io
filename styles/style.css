@@ -291,6 +291,18 @@ article ul li {
     line-height: 1.4;
 }
 
+dd ul {
+    margin-bottom: 0;
+}
+
+dd ul li {
+    list-style-type: decimal;
+}
+
+dd ul li a {
+    font-size: 1em;
+}
+
 span {
     font-weight: bold;
 }
