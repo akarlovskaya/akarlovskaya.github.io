@@ -1,16 +1,16 @@
 /* jshint esversion: 6 */
 document.querySelector('.get-jokes').addEventListener('click', getJokes);
+const UL_EL = document.querySelector('.jokes');
 
 function getJokes(e) {
-    const INPUT_EL = document.getElementById('number');
-    const UL_EL = document.querySelector('.jokes');
+    const INPUT_EL = document.getElementById('text');
     const IMG_EL = document.querySelector('.image-div');
-    let inputVal = Number(INPUT_EL.value);
+    let inputVal = String(INPUT_EL.value);
     let jokesOutput = '';
 
-    if ( inputVal <= 0 ) {
+    if ( inputVal.length <= 0 ) {
         jokesOutput += `
-            <li class="error">Number of jokes should be 1 or more</li>
+            <li class="error">Please enter search query</li>
         `;
         UL_EL.innerHTML = jokesOutput;
         e.preventDefault();
@@ -20,7 +20,7 @@ function getJokes(e) {
     // create new XMLHttpRequest Object instance
     const XHR = new XMLHttpRequest();
     // specify request using open() method
-    XHR.open('GET', `http://api.icndb.com/jokes/random/${inputVal}`, true);
+    XHR.open('GET', `https://api.chucknorris.io/jokes/search?query=${inputVal}`, true);
 
     XHR.onload = function() {
         // check if request was status seccessful
@@ -28,15 +28,15 @@ function getJokes(e) {
             // convert text in JS Object
             let jokesObj = JSON.parse(this.responseText);
             // getting jokes arr using "value" property
-            let jokesArr = jokesObj.value;
+            let jokesArr = jokesObj.result;
 
-            if ( jokesObj.type === 'success' ) {
+            if ( jokesArr.length >= 0 ) {
                 // show image
                 IMG_EL.className += ' shown';
                 // iterate through jokesArr
                 jokesArr.forEach(function(item){
                     jokesOutput += `
-                        <li>${item.joke}</li>
+                        <li>${item.value}</li>
                     `;
                 });
             } else {
@@ -49,3 +49,7 @@ function getJokes(e) {
     XHR.send();
     e.preventDefault();
 }
+
+function clearInput() {
+    UL_EL.innerHTML = '';
+  };
