@@ -30,6 +30,12 @@ function getJokes(e) {
             // getting jokes arr using "value" property
             let jokesArr = jokesObj.result;
 
+            if (jokesArr.length === 0) {
+                jokesOutput += `
+                        <li>No jokes for this query!</li>
+                    `;
+            };
+
             if ( jokesArr.length >= 0 ) {
                 // show image
                 IMG_EL.className += ' shown';
