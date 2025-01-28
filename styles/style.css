@@ -379,7 +379,7 @@ div[data-type="reactjs"] img {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.js-title {
+.js-title, .react-title  {
     padding: 30px 0 15px 31px;
 }
 
@@ -389,6 +389,10 @@ div[data-type="reactjs"] img {
     position: relative;
     max-width: 50px;
     margin-right: 12px;
+}
+
+.react-description {
+    min-height: 166px;
 }
 
 .js-project-wrapper div>a {
